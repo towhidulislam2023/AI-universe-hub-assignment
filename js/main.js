@@ -11,14 +11,20 @@ const loadAllData = (inputNum) => {
 
 const displayCardData = (data) => {
     console.log(data.length);
-    if (data.length === 12) {
-      document.getElementById('showAllBtn').classList.add('d-none')
+    if (data.length === 6) {
+        document.getElementById('showAllBtn').classList.remove('d-none')
+        
     }
+    else {
+        document.getElementById('showAllBtn').classList.add('d-none')
+        
+    }
+
     const targetContainer = document.getElementById('cardContainer')
     targetContainer.innerHTML = '';
     // console.log(data);
     data.forEach(element => {
-        console.log(element.image);
+        console.log(element.id);
 
 
 
@@ -35,11 +41,9 @@ const displayCardData = (data) => {
                     <ol>
                         <li>${element.features[0]?element.features[0]:""}</li>
                         <li>${element.features[1]?element.features[1]:""}</li>
-                        <li>${element.features[2]?element.features[2]:""}</li>
+                        <li>${element.features[2]?element.features[2]:" Not Available"}</li>
                         <li style="list-style:none;">${element.features[3]?element.features[3]:""}</li>
                     </ol>
-
-
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
@@ -48,7 +52,7 @@ const displayCardData = (data) => {
                     <p><i class="fa-regular fa-calendar-days"></i> ${element.published_in}</p>
                 </div>
                 <div>
-                    <button class="btn border border-2 rounded-circle btn-danger" data-bs-toggle="modal"
+                    <button onclick="loadModalData('${element.id}')" class="btn border border-2 rounded-circle btn-danger" data-bs-toggle="modal"
                         data-bs-target="#exampleModal"><i
                             class="fa-solid fa-arrow-right fa-2x"></i></button>
                 </div>
@@ -56,18 +60,30 @@ const displayCardData = (data) => {
             </div>
         </div>
     </div>
-
-
-
-
-
-        
-        `
-
-        
+`
     });
     
 }
+
+
+//modal Data
+
+const loadModalData = (id) => {
+    const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`
+    console.log(URL);
+    fetch(URL).then(res => res.json()).then(data => {
+        displayModalData(data.data);
+    })
+    
+}
+
+const displayModalData = (data) => {
+    console.log(data.description);
+
+    
+    
+}
+
 
 
 
