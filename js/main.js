@@ -78,9 +78,145 @@ const loadModalData = (id) => {
 }
 
 const displayModalData = (data) => {
-    console.log(data.description);
-
+    console.log(data.pricing ? data.pricing[2].price:" ");
     
+
+
+
+    let planNameforbasic =data.pricing?data.pricing[0].plan:"Free of Cost/Basic";
+    if (planNameforbasic === 'Free'||planNameforbasic === '0') {
+        planNameforbasic='Basic'
+        
+    }
+    let priceingFeeforbasic = (data.pricing?data.pricing[0].price:" ");
+    if (priceingFeeforbasic === '0'||priceingFeeforbasic === '') {
+        priceingFeeforbasic="Free Of Cost/"
+    }
+    let planNameforpro =data.pricing? data.pricing[1].plan:"Free of Cost/pro";
+    if (planNameforpro === 'Free'||planNameforpro === '0') {
+        planNameforpro='pro'
+        
+    }
+    let priceingFeeforpro = (data.pricing?data.pricing[1].price:"");
+    if (priceingFeeforpro === '0'||priceingFeeforpro === 'No cost') {
+        priceingFeeforpro="Free Of Cost/"
+    }
+
+    // data.forEach(elem => {
+    //     console.log(elem);
+        
+    // });
+
+
+
+
+
+
+
+
+    const modalContainer = document.getElementById('modal-container');
+    modalContainer.innerHTML = '';
+    modalContainer.innerHTML += `
+    <div class="modal-content ">
+    <div class="modal-header">
+        <button type="button" class="btn-close btn border border-2 rounded-circle btn-danger"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <!-- <div class="d-flex flex-column flex-md-row justify-content-center gap-5 "> -->
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col-12 col-md-8">
+                <div class="card text-bg-light bg-danger-subtle mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${data.description}</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-5 my-3 w-100">
+                            <div class="bg-light rounded-2 d-flex justify-content-center align-items-center p-2"
+                                style="height: 100px; width: 100px;">
+                                <p class="text-center fw-bold text-success w-100">${priceingFeeforbasic} ${planNameforbasic}</p>
+                            </div>
+                            <div class=" bg-light rounded-2 d-flex justify-content-center align-items-center p-2"
+                                style="height: 100px; width: 100px;">
+                                <p class="text-center fw-bold text-danger-emphasis w-100">  ${priceingFeeforpro}
+                                ${planNameforpro}
+                               
+                                </p>
+
+                            </div>
+                            <div class="bg-light rounded-2 d-flex justify-content-center align-items-center"
+                                style="height: 100px; width: 150px;">
+                                <p class="text-center fw-bold text-danger w-100">
+                                ${data.pricing ? data.pricing[2].price : " Data Not Found"} ${data.pricing ? data.pricing[2].plan:" "}
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-center gap-5 my-5 p-3 w-120">
+                            <div>
+                                <h5 class="fw-bold"> Features</h5>
+                                <ul>
+                                    <li>
+                                        Customizable responses
+                                    </li>
+                                    <li>
+                                        Customizable responses
+                                    </li>
+                                    <li>
+                                        Customizable responses
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div>
+                                <div>
+                                    <h5 class="fw-bold">Integrations</h5>
+                                    <ul>
+                                        <li>
+                                            Customizable responses
+                                        </li>
+                                        <li>
+                                            Customizable responses
+                                        </li>
+                                        <li>
+                                            Customizable responses
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class=" col-12 col-md-4 ">
+                <div class="card h-100 p-2">
+                    <img src="./download.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-text fw-bold">Hi, how are you doing today?</h5>
+                        <p class="text-center">I'm doing well, thank you for asking. How can I assist
+                            you today?</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+    
+    
+    
+    `
+
     
 }
 
