@@ -78,7 +78,11 @@ const loadModalData = (id) => {
 }
 
 const displayModalData = (data) => {
-    console.log(data.pricing ? data.pricing[2].price:" ");
+    // console.log(data.pricing ? data.pricing[2].price:" ");
+    console.log(data.integrations?data.integrations[0]:"No Data Found");
+    console.log(data.integrations?data.integrations[1]:"No Data Found");
+    console.log(data.integrations?data.integrations[2]:"No Data Found");
+
     
 
 
@@ -155,13 +159,13 @@ const displayModalData = (data) => {
                                 <h5 class="fw-bold"> Features</h5>
                                 <ul>
                                     <li>
-                                        Customizable responses
+                                       ${data.features[1].feature_name}
                                     </li>
                                     <li>
-                                        Customizable responses
+                                    ${data.features[2].feature_name}
                                     </li>
                                     <li>
-                                        Customizable responses
+                                    ${data.features[3].feature_name}
                                     </li>
                                 </ul>
 
@@ -171,13 +175,13 @@ const displayModalData = (data) => {
                                     <h5 class="fw-bold">Integrations</h5>
                                     <ul>
                                         <li>
-                                            Customizable responses
+                                           ${data.integrations?data.integrations[0]?data.integrations[0]:"No Data Found":"No Data Found"}
                                         </li>
                                         <li>
-                                            Customizable responses
+                                           ${data.integrations?data.integrations[1]?data.integrations[1]:"No Data Found":"No Data Found"}
                                         </li>
                                         <li>
-                                            Customizable responses
+                                        ${data.integrations?data.integrations[2]?data.integrations[2]:"No Data Found":"No Data Found"}
                                         </li>
                                     </ul>
 
