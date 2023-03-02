@@ -6,7 +6,7 @@ const loadAllData = (inputNum) => {
     fetch(URL).then(res => res.json()).then(data => {
         displayCardData(data.data.tools.slice(0, inputNum))
     })
-    
+    loadSpinner(true)
 }
 
 const displayCardData = (data) => {
@@ -23,8 +23,10 @@ const displayCardData = (data) => {
     const targetContainer = document.getElementById('cardContainer')
     targetContainer.innerHTML = '';
     // console.log(data);
+
+
     data.forEach(element => {
-        console.log(element.id);
+        console.log(element);
 
 
 
@@ -62,7 +64,7 @@ const displayCardData = (data) => {
     </div>
 `
     });
-    
+    loadSpinner(false)
 }
 
 
@@ -150,7 +152,7 @@ const displayModalData = (data) => {
                             <div class="bg-light rounded-2 d-flex justify-content-center align-items-center"
                                 style="height: 100px; width: 150px;">
                                 <p class="text-center fw-bold text-danger w-100">
-                                ${data.pricing ? data.pricing[2].price : " Data Not Found"} ${data.pricing ? data.pricing[2].plan:" "}
+                                ${data.pricing ? data.pricing[2].price : " Free of Cost /Enterprise"} ${data.pricing ? data.pricing[2].plan:" "}
                                 </p>
 
                             </div>
@@ -229,7 +231,20 @@ const displayModalData = (data) => {
     
 }
 
+function loadSpinner(isTrue) {
+    if (isTrue === true) {
+        document.getElementById('spinner').classList.remove('d-none')
+        
+    }
+    else {
+        document.getElementById('spinner').classList.add('d-none')
+        
+    }
+    
+}
 
 
 
-loadAllData(6)
+loadAllData(6);
+
+
