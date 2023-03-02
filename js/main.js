@@ -3,16 +3,25 @@ console.log("connected");
 
 const loadAllData = (inputNum) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tools`
-    fetch(URL).then(res=>res.json()).then(data=>displayCardData(data.data.tools.slice(0,inputNum)))
+    fetch(URL).then(res => res.json()).then(data => {
+        displayCardData(data.data.tools.slice(0, inputNum))
+    })
     
 }
 
 const displayCardData = (data) => {
+    console.log(data.length);
+    if (data.length === 12) {
+      document.getElementById('showAllBtn').classList.add('d-none')
+    }
     const targetContainer = document.getElementById('cardContainer')
     targetContainer.innerHTML = '';
     // console.log(data);
     data.forEach(element => {
         console.log(element.image);
+
+
+
 
 
 
@@ -24,10 +33,10 @@ const displayCardData = (data) => {
                 <h3 class="card-title fw-bold">Features</h3>
                 <div class="card-text">
                     <ol>
-                        <li>${element.features[0]?element.features[0]:" "}</li>
-                        <li>${element.features[1]?element.features[0]:" "}</li>
-                        <li>${element.features[2]?element.features[0]:" "}</li>
-                        <li style="list-style:none;">${element.features[3]?element.features[0]:" "}</li>
+                        <li>${element.features[0]?element.features[0]:""}</li>
+                        <li>${element.features[1]?element.features[1]:""}</li>
+                        <li>${element.features[2]?element.features[2]:""}</li>
+                        <li style="list-style:none;">${element.features[3]?element.features[3]:""}</li>
                     </ol>
 
 
