@@ -20,7 +20,7 @@ document.getElementById('sortBydate').addEventListener("click", function () {
             }
         }
         displayCardData(data.sort(datesort));
-        console.log(data.sort(datesort));
+        // console.log(data.sort(datesort));
     }
 })
 
@@ -35,7 +35,7 @@ const loadAllData = (inputNum) => {
 
 const displayCardData = (data) => {
 
-    console.log(data.length);
+    // console.log(data.length);
     if (data.length === 6) {
         document.getElementById('showAllBtn').classList.remove('d-none')
 
@@ -87,25 +87,19 @@ const displayCardData = (data) => {
 //modal Data
 const loadModalData = (id) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`
-    console.log(URL);
+    // console.log(URL);
     fetch(URL).then(res => res.json()).then(data => {
         displayModalData(data.data);
     })
 }
 
 const displayModalData = (data) => {
-    console.log(data.accuracy.score * 100);
-
-
-
-
-
+    // console.log(data.accuracy.score * 100);
     let planNameforbasic = data.pricing ? data.pricing[0].plan : "Free of Cost/Basic";
     if (planNameforbasic === 'Free' || planNameforbasic === '0') {
         planNameforbasic = 'Basic'
-
     }
-    let priceingFeeforbasic = (data.pricing ? data.pricing[0].price : " ");
+    let priceingFeeforbasic = (data.pricing ? data.pricing[0].price : "");
     if (priceingFeeforbasic === '0' || priceingFeeforbasic === 'No cost') {
         priceingFeeforbasic = "Free Of Cost/"
     }
@@ -124,13 +118,6 @@ const displayModalData = (data) => {
         accuracyData = ''
 
     }
-
-
-
-
-
-
-
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = '';
     modalContainer.innerHTML += `
@@ -196,16 +183,11 @@ const displayModalData = (data) => {
                                         ${data.integrations ? data.integrations[2] ? data.integrations[2] : "No Data Found" : "No Data Found"}
                                         </li>
                                     </ul>
-
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class=" col-12 col-md-4 ">
                 <div class="card h-100 p-2">
@@ -223,30 +205,19 @@ const displayModalData = (data) => {
             </div>
 
         </div>
-
-
-
-
-
     </div>
     <div class="modal-footer">
     </div>
 </div>
-    
-    
-    
     `
 }
 function loadSpinner(isTrue) {
     if (isTrue === true) {
         document.getElementById('spinner').classList.remove('d-none')
-
     }
     else {
         document.getElementById('spinner').classList.add('d-none')
 
     }
-
 }
-
 loadAllData(6);
