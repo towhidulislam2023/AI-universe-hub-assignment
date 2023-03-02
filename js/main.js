@@ -79,9 +79,7 @@ const loadModalData = (id) => {
 
 const displayModalData = (data) => {
     // console.log(data.pricing ? data.pricing[2].price:" ");
-    console.log(data.integrations?data.integrations[0]:"No Data Found");
-    console.log(data.integrations?data.integrations[1]:"No Data Found");
-    console.log(data.integrations?data.integrations[2]:"No Data Found");
+ console.log(data.accuracy.score*100);
 
     
 
@@ -93,7 +91,7 @@ const displayModalData = (data) => {
         
     }
     let priceingFeeforbasic = (data.pricing?data.pricing[0].price:" ");
-    if (priceingFeeforbasic === '0'||priceingFeeforbasic === '') {
+    if (priceingFeeforbasic === '0'||priceingFeeforbasic === 'No cost') {
         priceingFeeforbasic="Free Of Cost/"
     }
     let planNameforpro =data.pricing? data.pricing[1].plan:"Free of Cost/pro";
@@ -110,7 +108,11 @@ const displayModalData = (data) => {
     //     console.log(elem);
         
     // });
-
+    let accuracyData = data.accuracy.score * 100 +"% accuracy";
+    if (data.accuracy.score * 100 === 0) {
+        accuracyData=''
+    
+}
 
 
 
@@ -127,7 +129,6 @@ const displayModalData = (data) => {
             data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <!-- <div class="d-flex flex-column flex-md-row justify-content-center gap-5 "> -->
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col-12 col-md-8">
                 <div class="card text-bg-light bg-danger-subtle mb-3">
@@ -135,11 +136,11 @@ const displayModalData = (data) => {
                         <h5 class="card-title">${data.description}</h5>
                         <div class="d-flex flex-wrap justify-content-center gap-5 my-3 w-100">
                             <div class="bg-light rounded-2 d-flex justify-content-center align-items-center p-2"
-                                style="height: 100px; width: 100px;">
+                                style="height: 100px; width: 150px;">
                                 <p class="text-center fw-bold text-success w-100">${priceingFeeforbasic} ${planNameforbasic}</p>
                             </div>
                             <div class=" bg-light rounded-2 d-flex justify-content-center align-items-center p-2"
-                                style="height: 100px; width: 100px;">
+                                style="height: 100px; width: 150px;">
                                 <p class="text-center fw-bold text-danger-emphasis w-100">  ${priceingFeeforpro}
                                 ${planNameforpro}
                                
@@ -197,11 +198,15 @@ const displayModalData = (data) => {
             </div>
             <div class=" col-12 col-md-4 ">
                 <div class="card h-100 p-2">
-                    <img src="./download.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-text fw-bold">Hi, how are you doing today?</h5>
-                        <p class="text-center">I'm doing well, thank you for asking. How can I assist
-                            you today?</p>
+                <div style="background-color: rgba(223, 1, 129); top:15px; left:24px;" class=" position-absolute px-3 rounded fw-bold text-light">${accuracyData}</div>
+                    <img src="${data.image_link[0]}" class="card-img-top" alt="...">
+                    <div class="card-body"><h5 class="card-text fw-bold text-center">
+                    ${data.input_output_examples?data.input_output_examples[0].input :"Can you give any example?"}</h5>
+                        <p class="text-center">${data.input_output_examples?data.input_output_examples[1].output: "No! Not Yet! Take a break!!!"}</p>
+                        <br>
+                        <h5 class="card-text fw-bold text-center">
+                        ${data.input_output_examples?data.input_output_examples[1].input: " "}</h5>
+                        <p class="text-center">${data.input_output_examples?data.input_output_examples[1].output: ""}</p>
                     </div>
                 </div>
             </div>
