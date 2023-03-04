@@ -1,38 +1,33 @@
-// sortBydate btn 
-document.getElementById('sortBydate').addEventListener("click", function () {
-    const URL = `https://openapi.programming-hero.com/api/ai/tools`
-    fetch(URL).then(res => res.json()).then(data => dosort(data.data.tools))
-
-    dosort = (data) => {
-        console.log(data);
-        datesort = (a, b) => {
-            const dateA =Number(new Date(a.published_in));
-            const dateB =Number(new Date(b.published_in));
-            if (dateA < dateB) {
-                return 1;
-                
-            }
-            else if (dateB < dateA) {
-                return -1
-            }
-            else {
-                return 0
-            }
-        }
-        displayCardData(data.sort(datesort));
-        // console.log(data.sort(datesort));
-    }
-})
-
 ///load data
 const loadAllData = (inputNum) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tools`
     fetch(URL).then(res => res.json()).then(data => {
         displayCardData(data.data.tools.slice(0, inputNum))
+        document.getElementById('sortBydate').addEventListener("click", function () { 
+            dosort(data.data.tools.slice(0, inputNum))
+        })
     })
     loadSpinner(true)
 }
-
+const dosort = (data) => {
+    console.log(data);
+   const datesort = (a, b) => {
+        const dateA =Number(new Date(a.published_in));
+        const dateB =Number(new Date(b.published_in));
+        if (dateA < dateB) {
+            return 1;
+            
+        }
+        else if (dateB < dateA) {
+            return -1
+        }
+        else {
+            return 0
+        }
+    }
+    displayCardData(data.sort(datesort));
+    // console.log(data.sort(datesort));
+}
 const displayCardData = (data) => {
 
     // console.log(data.length);
